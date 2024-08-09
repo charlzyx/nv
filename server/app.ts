@@ -27,14 +27,24 @@ const routes: Record<
     const data = await resp.json();
     return data;
   },
-  "/wol": async (req) => {
-    const output = await $`awake 24:4b:fe:5a:6a:14`.text();
+  "/要相信光啊": async (req) => {
+    await $`awake 24:4b:fe:5a:6a:14`.text();
     return true;
   },
   "/wolstatus": async (req) => {
     const output = await $`ping 10.5.6.5 -c 2 -w 1`.text();
     const offline = output.includes("100% packet loss");
     return offline ? "offline" : "online";
+  },
+  "/update": async (req) => {
+    const cli = `
+    wget https://github.com/charlzyx/nv/releases/download/master/nv.tar.gz -O nv.tar.gz
+    rm -rf dist server package.json
+    tar -xvf nv.tar.gz 
+    bun i --production
+    service nv restart
+    `;
+    await $`${cli}`;
   },
   "/si": async (req) => {
     const url = new URL(req.url);
@@ -70,14 +80,14 @@ Bun.serve({
         const file = Bun.file(filePath);
         const exists = await file.exists();
         if (!exists) {
-          return Response.redirect("/index.html");
+          return Response.redirect("/");
         }
         return new Response(file);
       } catch (error) {
-        return Response.redirect("/index.html");
+        return Response.redirect("/");
       }
     }
-    const matcher = url.pathname.replace(/^\/api/, "");
+    const matcher = decodeURIComponent(url.pathname.replace(/^\/api/, ""));
     const [name, handler] =
       Object.entries(routes).find(([key, handler]) => {
         return key === matcher;

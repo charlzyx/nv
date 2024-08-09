@@ -46,3 +46,7 @@ a {
 .groupgroup .title > h3 {
   flex: 1;
 }
+
+.keepword {
+  word-break: keep-all;
+}
