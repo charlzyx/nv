@@ -28,7 +28,7 @@ const routes: Record<
     return data;
   },
   "/wol": async (req) => {
-    const output = await $`awake 24:4b:fe:5a:6a:14`.text();
+ await $`awake 24:4b:fe:5a:6a:14`.text();
     return true;
   },
   "/wolstatus": async (req) => {
@@ -70,11 +70,11 @@ Bun.serve({
         const file = Bun.file(filePath);
         const exists = await file.exists();
         if (!exists) {
-          return Response.redirect("/index.html");
+          return Response.redirect("/");
         }
         return new Response(file);
       } catch (error) {
-        return Response.redirect("/index.html");
+        return Response.redirect("/");
       }
     }
     const matcher = url.pathname.replace(/^\/api/, "");

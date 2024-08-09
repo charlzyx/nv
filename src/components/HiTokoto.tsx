@@ -1,4 +1,4 @@
-import { Loading } from "@geist-ui/core";
+import { Divider, Loading } from "@geist-ui/core";
 
 import { useEffect, useState } from "react";
 import { req } from "../req";
@@ -14,8 +14,17 @@ export const useHitokoto = () => {
 
   useEffect(() => {
     req("/hitokoto")
-      .then((res) => (res ? setData(res) : setError(true)))
-      .catch(() => setError(true));
+      .then((res) => (res ? setData(res) : setData({
+        from: '食戟之灵',
+        hitokoto: '从进入厨房的瞬间开始，你们就肩负着烹饪美食的责任。'
+      })))
+      .catch(() => {
+        setData({
+          from: '食戟之灵',
+          hitokoto: '从进入厨房的瞬间开始，你们就肩负着烹饪美食的责任。'
+        })
+      });
+    // .catch(() => setError(true));
   }, []);
 
   return [data, error] as const;
@@ -23,12 +32,12 @@ export const useHitokoto = () => {
 
 export const Hitokoto = () => {
   const [hi, error] = useHitokoto();
-  if (error) return <p>一言加载失败</p>;
+  if (error) return null;
 
   return hi.hitokoto ? (
     <>
       {hi.hitokoto}
-      <p className="text-0.65rem my-1 op-60">来源: {hi.from}</p>
+      <p className="text-2.5 my-1 op-60">来源: {hi.from}</p>
     </>
   ) : (
     <div className="">

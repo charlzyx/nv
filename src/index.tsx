@@ -11,6 +11,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       value={{
         refreshWhenHidden: false,
         revalidateOnFocus: false,
+        refreshWhenOffline: false,
       }}
     >
       <App />
