@@ -32,14 +32,11 @@ jobs:
       - name: Install dependencies
         run: bun install
       - name: Build with VitePress
-        run: bun run build # or pnpm docs:build / yarn docs:build / bun run docs:build
+        run: bun run build && tar -cxvf ./nv.tar.gz ./dist ./server package.json
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: "${{ github.action_ref }}"
-          files: |
-            ./dist/**
-            ./server/**
-            package.json
+          tag_name: "${{ github.head_ref }}"
+          files: nv.tar.gz
           body: '<a href="https://github.com/charlzyx/nv/blob/master/CHANGELOG.md">CHANGELOG</a>'
