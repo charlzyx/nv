@@ -42,4 +42,5 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: "${{ github.action_ref }}"
+          files: ./dist ./server package.json
           body: '<a href="https://github.com/charlzyx/nv/blob/master/CHANGELOG.md">CHANGELOG</a>'
