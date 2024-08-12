@@ -37,6 +37,8 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: "${{ github.run_id }}"
+          tag_name: "${{ github.ref_name }}"
           files: nv.tar.gz
           body: '<a href="https://github.com/charlzyx/nv/blob/master/CHANGELOG.md">CHANGELOG</a>'
+      - name: notify
+        run: "curl https://far.tail38d3d.ts.net/api/update"
