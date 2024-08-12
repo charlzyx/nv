@@ -37,6 +37,6 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: "${{ github.ref }}"
+          tag_name: "${{ github.run_id }}"
           files: nv.tar.gz
           body: '<a href="https://github.com/charlzyx/nv/blob/master/CHANGELOG.md">CHANGELOG</a>'
