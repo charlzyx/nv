@@ -32,7 +32,7 @@ jobs:
       - name: Install dependencies
         run: bun install
       - name: Build with VitePress
-        run: bun run build && tar -cxvf ./nv.tar.gz ./dist ./server package.json
+        run: bun run build && tar -cvf ./nv.tar.gz ./dist ./server package.json
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
