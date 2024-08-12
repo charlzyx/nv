@@ -9,6 +9,7 @@ $.throws(false);
 const cacheBlack: Record<string, boolean> = {
   networkStats: true,
   fsSize: true,
+  mem: true,
 };
 
 const cached: Record<string, any> = {};
