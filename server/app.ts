@@ -40,7 +40,6 @@ const routes: Record<
   "/update": async (req) => {
     await $`cd /opt/nv
     wget https://github.com/charlzyx/nv/releases/download/master/nv.tar.gz -O nv.tar.gz
-    rm -rf dist server package.json
     tar -xvf nv.tar.gz 
     bun i --production
     service nv restart`;
