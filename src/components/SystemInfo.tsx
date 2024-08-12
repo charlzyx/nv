@@ -119,8 +119,8 @@ export default function SystemIno() {
         </div>
         <div>
           <div className="text-4 mb-2">
-            已使用 {mem ? cent(mem.used, mem.total) : 0}% 剩余{" "}
-            {readable(mem?.available!)} / {readable(mem?.total!)}
+            {mem ? cent(mem.total - mem.available, mem.total) : 0}%{" "}
+            {readable(mem?.total!)}
           </div>
           {memLayout?.map((ml) => {
             return ml.manufacturer ? (

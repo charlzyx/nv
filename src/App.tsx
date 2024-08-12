@@ -34,13 +34,12 @@ function App() {
               <a className="link">Nothing to fear. </a>
             </div>
             <a href="https://github.com/charlzyx">
-              <div className="mt-2 flex align-center">
+              <div className="mt-2 flex align-center lh-4">
                 <div className="i-carbon:logo-github text-4 mr-3 mt-0" />
-                <span className="op-100">
-                  ©&nbsp;{getYear(new Date())}&nbsp;
+                <span className="op-100 lh-5">
+                  ©&nbsp;{getYear(new Date())}&nbsp; Power By&nbsp;
                 </span>
-                Power By&nbsp;
-                <a className="link"> charlzyx </a>
+                <a className="link "> charlzyx </a>
               </div>
             </a>
           </div>
