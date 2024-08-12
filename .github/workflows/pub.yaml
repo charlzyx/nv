@@ -33,17 +33,13 @@ jobs:
         run: bun install
       - name: Build with VitePress
         run: bun run build # or pnpm docs:build / yarn docs:build / bun run docs:build
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: "${{ github.action_ref }}"
           files: |
-            ./dist 
-            ./server 
+            ./dist/**
+            ./server/**
             package.json
           body: '<a href="https://github.com/charlzyx/nv/blob/master/CHANGELOG.md">CHANGELOG</a>'
