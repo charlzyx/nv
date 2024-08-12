@@ -117,8 +117,8 @@ export default function SystemIno() {
         </div>
         <div>
           <div className="text-4 mb-2">
-            {mem ? cent(mem.free, mem.total) : 0}% Free &nbsp;
-            {readable(mem?.total!)}
+            {mem ? cent(mem.free, mem.total) : 0}% 可用 {readable(mem?.free!)}
+            &nbsp; / {readable(mem?.total!)}
           </div>
           {memLayout?.map((ml) => {
             return ml.manufacturer ? (
