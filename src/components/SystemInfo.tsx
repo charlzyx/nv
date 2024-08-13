@@ -1,8 +1,9 @@
 import { useEffect, useMemo } from "react";
 import * as si from "../components/useSi";
 import { Divider } from "@geist-ui/core";
+import { parseMetric } from "../parse";
 
-const units = ["b", "KB", "MB", "GB", "TB"];
+const units = ["Bytes", "KiB", "MiB", "GiB", "TiB"];
 const upper = (x?: string) => (x ? x.replace(/\w/, (m) => m.toUpperCase()) : x);
 const readable = (x: number, toFixed = 2) => {
   if (Number.isNaN(+x)) return "";
@@ -15,6 +16,41 @@ const readable = (x: number, toFixed = 2) => {
   }
   return n.toFixed(toFixed) + units[uidx];
 };
+
+function readtime(s: number) {
+  const now = +new Date();
+  let seconds = now / 1000 - s;
+  const years = Math.floor(seconds / 31536000); // 一年大约有31536000秒
+  seconds -= years * 31536000;
+
+  const months = Math.floor(seconds / 2628000); // 一个月大约有2628000秒
+  seconds -= months * 2628000;
+
+  const days = Math.floor(seconds / 86400); // 一天有86400秒
+  seconds -= days * 86400;
+
+  const hours = Math.floor(seconds / 3600); // 一小时有3600秒
+  seconds -= hours * 3600;
+
+  const minutes = Math.floor(seconds / 60); // 一分钟有60秒
+
+  const ret = {
+    years: years,
+    months: months,
+    days: days,
+    hours: hours,
+    minutes: minutes,
+  };
+  return [
+    years > 0 ? years + "年" : "",
+    years > 0 || months > 0 ? months + "月" : "",
+    years > 0 || months > 0 || days > 0 ? days + "天" : "",
+    years > 0 || months > 0 || days > 0 || hours > 0 ? hours + "小时" : "",
+    years > 0 || months > 0 || days > 0 || hours > 0 || minutes > 0
+      ? minutes + "分钟"
+      : "",
+  ].join("");
+}
 
 const cent = (a: number, b: number) => {
   return (((a || 0) / (b || 1)) * 100).toFixed(2);
@@ -34,7 +70,12 @@ const Code = (props: { title: string; data: any }) => {
 export const BaseInfo = (props: { children: React.ReactNode }) => {
   const { data: os } = si.useOsInfo();
   const { data: system } = si.useSystem();
-  const { data: networkStatus } = si.useNetworkStats();
+  // const { data: networkStatus } = si.useNetworkStats();
+  const { data: net } = si.useBaseBootRxTx();
+  // const base = useMemo(() => {
+  //   return parseMetric(text);
+  // }, []);
+  // console.log("🚀 ~ BaseInfo ~ base:", base);
   // const { data: ifaces } = si.useNetworkInterfaces();
   useEffect(() => {
     window.document.title = `Far.${system?.manufacturer || "AMD"}® ${
@@ -52,20 +93,17 @@ export const BaseInfo = (props: { children: React.ReactNode }) => {
           {system?.version || "YES!"}
         </div>
         <div className="text-3">
+          <div>运行时间: {readtime(net?.boot)}</div>
           {upper(os?.distro)} @{os?.hostname} {os?.arch}.{os?.platform}
         </div>
         <div className="flex mt-2">
           <div className="i-carbon:server-proxy text-4 mr-3 mt-0.5" />
           <div>
-            {networkStatus?.map((net) => {
-              return (
-                <div>
-                  <div className="mt-1">
-                    Rx {readable(net.rx_sec!)}/s Tx {readable(net.tx_sec!)}/s
-                  </div>
-                </div>
-              );
-            })}
+            <div>
+              <div className="mt-1">
+                Rx {readable(net?.rx)}/s Tx {readable(net?.tx)}/s
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "NODE_ENV=production vite dev & bun server/app.ts",
+    "dev": "vite dev & bun server/app.ts",
     "build": "vite build"
   },
   "dependencies": {

@@ -18,6 +18,36 @@ const routes: Record<
   string,
   (req: Request) => Response | Promise<Response> | any
 > = {
+  "/prometheus": async (req) => {
+    const exp_rx = `irate(node_network_receive_bytes_total{job="路由器",instance=~'10.5.6.1:9100',device=\"pppoe-wan\"}[5m])`;
+    const exp_tx = `irate(node_network_transmit_bytes_total{job="路由器",instance=~'10.5.6.1:9100',device=\"pppoe-wan\"}[5m])`;
+    const exp_boot = `node_boot_time_seconds{job="路由器"}`;
+
+    const [rx, tx, boot] = await Promise.all([
+      fetch(
+        `http://10.5.6.12:9090/api/v1/query?query=${encodeURIComponent(exp_rx)}`
+      )
+        .then((resp) => resp.json())
+        .then((ret) => ret?.data?.result?.[0].value?.[1]),
+      fetch(
+        `http://10.5.6.12:9090/api/v1/query?query=${encodeURIComponent(exp_tx)}`
+      )
+        .then((resp) => resp.json())
+        .then((ret) => ret?.data?.result?.[0].value?.[1]),
+      fetch(
+        `http://10.5.6.12:9090/api/v1/query?query=${encodeURIComponent(
+          exp_boot
+        )}`
+      )
+        .then((resp) => resp.json())
+        .then((ret) => ret?.data?.result?.[0].value?.[1]),
+    ]);
+    return {
+      rx: +rx,
+      tx: +tx,
+      boot: +boot,
+    };
+  },
   "/hitokoto": async (req) => {
     const resp = await fetch("https://v1.hitokoto.cn/?c=a", {
       headers: {

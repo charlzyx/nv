@@ -1,8 +1,10 @@
 import { getYear } from "date-fns";
-import { Divider } from "@geist-ui/core";
+import { Code, Divider } from "@geist-ui/core";
 import { Hitokoto } from "./components/HiTokoto";
 import SystemIno, { BaseInfo } from "./components/SystemInfo";
 import { BreathOfWild } from "./components/Online";
+import { parseMetric } from "./parse";
+import { metrics } from "./components/metrics";
 
 function App() {
   return (
@@ -28,7 +30,6 @@ function App() {
           <div className="w-20"></div>
           <div className="text-right dark:op-60">
             <div className="custom-bg" />
-
             <div className="mt-2 flex align-center">
               <div className="i-carbon:bat text-4 mr-3 mt-1" />
               <a className="link">Nothing to fear. </a>

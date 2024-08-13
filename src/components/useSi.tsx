@@ -64,6 +64,11 @@ import type {
   powerShellRelease,
 } from "systeminformation";
 
+export function useBaseBootRxTx() {
+  return useSWR<{ rx: number; tx: number; boot: number }>("/prometheus", req, {
+    refreshInterval: 5000,
+  });
+}
 export function useVersion() {
   return useSWR<Awaited<ReturnType<typeof version>>>("/si?fn=version", req);
 }
