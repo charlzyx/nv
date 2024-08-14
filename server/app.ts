@@ -4,6 +4,8 @@ import * as systeminformation from "systeminformation";
 
 const PUBIC = path.resolve(import.meta.dir, "../dist");
 
+const RESTART = path.resolve(import.meta.dir, './restart.sh')
+
 $.throws(false);
 
 const cacheBlack: Record<string, boolean> = {
@@ -67,17 +69,8 @@ const routes: Record<
     const offline = output.includes("100% packet loss");
     return offline ? "offline" : "online";
   },
-  sayhi: async (req) => {
-    const ans = await $`${req.body?.toString()}`;
-    return ans;
-  },
   "/update": async (req) => {
-    await $`cd /opt/nv
-    wget https://github.com/charlzyx/nv/releases/download/master/nv.tar.gz -O nv.tar.gz
-    tar -xvf nv.tar.gz 
-    source ./server/restart.sh; 
-    bun i --production
-    service nv restart`;
+    await $`source ${RESTART}`;
   },
 
   "/si": async (req) => {
