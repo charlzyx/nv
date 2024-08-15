@@ -21,10 +21,11 @@ function App() {
       </header>
       <main className="p-4">
         <div className="font-300 text-13px flex justify-between items-end w-full">
-          <SystemIno />
-        </div>
-        <div className="font-300 text-13px flex justify-between items-end w-full">
           <Links />
+        </div>
+        <Divider className="mt-8"></Divider>
+        <div className="mt-8 font-300 text-13px flex justify-between items-end w-full">
+          <SystemIno />
         </div>
       </main>
       <footer className="op-60 mt-8 absolute bottom-4 right-4 left-0">
