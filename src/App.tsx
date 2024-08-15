@@ -1,10 +1,9 @@
+import { Divider } from "@geist-ui/core";
 import { getYear } from "date-fns";
-import { Code, Divider } from "@geist-ui/core";
 import { Hitokoto } from "./components/HiTokoto";
-import SystemIno, { BaseInfo } from "./components/SystemInfo";
 import { BreathOfWild } from "./components/Online";
-import { parseMetric } from "./parse";
-import { metrics } from "./components/metrics";
+import SystemIno, { BaseInfo } from "./components/SystemInfo";
+import { Links } from "./components/Links";
 
 function App() {
   return (
@@ -23,6 +22,9 @@ function App() {
       <main className="p-4">
         <div className="font-300 text-13px flex justify-between items-end w-full">
           <SystemIno />
+        </div>
+        <div className="font-300 text-13px flex justify-between items-end w-full">
+          <Links />
         </div>
       </main>
       <footer className="op-60 mt-8 absolute bottom-4 right-4 left-0">
