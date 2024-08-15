@@ -7,7 +7,7 @@ import { Links } from "./components/Links";
 
 function App() {
   return (
-    <div className="min-h-100vh pt-20px px-4 max-w-5xl mx-auto relative">
+    <div className="min-h-100vh pt-20px px-4 pb-20 max-w-5xl mx-auto relative">
       <header>
         <div className="p-4 max-w-5xl mx-auto">
           <BaseInfo>
