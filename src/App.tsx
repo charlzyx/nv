@@ -20,10 +20,10 @@ function App() {
         </div>
       </header>
       <main className="p-4">
-        <div className="font-300 text-13px flex justify-between items-end w-full">
+        <div className="mb-4 font-300 text-13px flex justify-between items-end w-full">
           <Links />
         </div>
-        <Divider className="mt-8"></Divider>
+        <Divider></Divider>
         <div className="mt-8 font-300 text-13px flex justify-between items-end w-full">
           <SystemIno />
         </div>
