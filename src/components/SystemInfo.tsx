@@ -77,17 +77,17 @@ export const BaseInfo = (props: { children: React.ReactNode }) => {
   // }, []);
   // console.log("🚀 ~ BaseInfo ~ base:", base);
   // const { data: ifaces } = si.useNetworkInterfaces();
-  useEffect(() => {
-    window.document.title = `Far.${system?.manufacturer || "AMD"}® ${
-      system?.model || ""
-    } ${system?.version || "YES!"} `;
-  }, [system]);
+  // useEffect(() => {
+  // window.document.title = `Far.${system?.manufacturer || "AMD"}® ${
+  //   system?.model || ""
+  // } ${system?.version || "YES!"} `;
+  // }, [system]);
 
   return (
     <div className="flex justify-between text-3">
       <div>
         <div className="flex text-5 mb-2 mt-3 lh-8">
-          <div className="i-carbon:airplay mt-1 text-6 mr-2" />
+          <div className="i-carbon:airplay mt-2 text-6 mr-2" />
           <div className="flex mr-2 mt-2">{props.children}</div>
           超の空间斩
           {/* {system?.manufacturer || "AMD"}&reg; {system?.model}{" "} */}
