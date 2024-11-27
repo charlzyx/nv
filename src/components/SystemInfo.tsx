@@ -93,18 +93,7 @@ export const BaseInfo = (props: { children: React.ReactNode }) => {
           {system?.version || "YES!"}
         </div>
         <div className="text-3">
-          <div>运行时间: {readtime(net?.boot)}</div>
           {upper(os?.distro)} @{os?.hostname} {os?.arch}.{os?.platform}
-        </div>
-        <div className="flex mt-2">
-          <div className="i-carbon:server-proxy text-4 mr-3 mt-0.5" />
-          <div>
-            <div>
-              <div className="mt-1">
-                Rx {readable(net?.rx)}/s Tx {readable(net?.tx)}/s
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>

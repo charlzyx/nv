@@ -4,7 +4,7 @@ import * as systeminformation from "systeminformation";
 
 const PUBIC = path.resolve(import.meta.dir, "../dist");
 
-const RESTART = path.resolve(import.meta.dir, './restart.sh')
+const RESTART = path.resolve(import.meta.dir, "./restart.sh");
 
 $.throws(false);
 
@@ -20,36 +20,6 @@ const routes: Record<
   string,
   (req: Request) => Response | Promise<Response> | any
 > = {
-  "/prometheus": async (req) => {
-    const exp_rx = `irate(node_network_receive_bytes_total{job="路由器",instance=~'10.5.6.1:9100',device=\"pppoe-wan\"}[5m])`;
-    const exp_tx = `irate(node_network_transmit_bytes_total{job="路由器",instance=~'10.5.6.1:9100',device=\"pppoe-wan\"}[5m])`;
-    const exp_boot = `node_boot_time_seconds{job="路由器"}`;
-
-    const [rx, tx, boot] = await Promise.all([
-      fetch(
-        `http://10.5.6.12:9090/api/v1/query?query=${encodeURIComponent(exp_rx)}`
-      )
-        .then((resp) => resp.json())
-        .then((ret) => ret?.data?.result?.[0].value?.[1]),
-      fetch(
-        `http://10.5.6.12:9090/api/v1/query?query=${encodeURIComponent(exp_tx)}`
-      )
-        .then((resp) => resp.json())
-        .then((ret) => ret?.data?.result?.[0].value?.[1]),
-      fetch(
-        `http://10.5.6.12:9090/api/v1/query?query=${encodeURIComponent(
-          exp_boot
-        )}`
-      )
-        .then((resp) => resp.json())
-        .then((ret) => ret?.data?.result?.[0].value?.[1]),
-    ]);
-    return {
-      rx: +rx,
-      tx: +tx,
-      boot: +boot,
-    };
-  },
   "/hitokoto": async (req) => {
     const resp = await fetch("https://v1.hitokoto.cn/?c=a", {
       headers: {
@@ -69,14 +39,6 @@ const routes: Record<
     const offline = output.includes("100% packet loss");
     return offline ? "offline" : "online";
   },
-  "/update": async (req) => {
-    await $`
-      cd /opt/nv
-      wget https://github.com/charlzyx/nv/releases/download/master/nv.tar.gz -O nv.tar.gz
-      tar -xvf nv.tar.gz 
-      bun i --production
-    `;
-   },
   "/si": async (req) => {
     const url = new URL(req.url);
     const fn = url.searchParams.get("fn") || "EMPTY_FN_PARAM";
@@ -101,7 +63,7 @@ const routes: Record<
 };
 
 Bun.serve({
-  port: 8080,
+  port: 3000,
   async fetch(req, res) {
     const url = new URL(req.url);
     if (!/^\/api/.test(url.pathname)) {
