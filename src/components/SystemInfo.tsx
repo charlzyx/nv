@@ -87,14 +87,15 @@ export const BaseInfo = (props: { children: React.ReactNode }) => {
     <div className="flex justify-between text-3">
       <div>
         <div className="flex text-5 mb-2 mt-3 lh-8">
-          <div className="i-carbon:airplay text-6 mr-2" />
+          <div className="i-carbon:airplay mt-1 text-6 mr-2" />
           <div className="flex mr-2 mt-2">{props.children}</div>
-          {system?.manufacturer || "AMD"}&reg; {system?.model}{" "}
-          {system?.version || "YES!"}
+          超の空间斩
+          {/* {system?.manufacturer || "AMD"}&reg; {system?.model}{" "} */}
+          {/* {system?.version || "YES!"} */}
         </div>
-        <div className="text-3">
+        {/* <div className="text-3">
           {upper(os?.distro)} @{os?.hostname} {os?.arch}.{os?.platform}
-        </div>
+        </div> */}
       </div>
     </div>
   );
@@ -162,7 +163,7 @@ export default function SystemIno() {
         </div>
       </div>
 
-      <div className="flex items-top sm:flex-row flex-col children:mb-2">
+      {/* <div className="flex items-top sm:flex-row flex-col children:mb-2">
         <div className="i-carbon:archive text-4 mr-3 mt-0.5" />
         <div className="text-3.8 mr-4 w-12 keepword">
           硬<span className="op-0">软</span>盘
@@ -186,7 +187,7 @@ export default function SystemIno() {
             ) : null;
           })}
         </div>
-      </div>
+      </div> */}
       {graphic ? (
         <div className="flex items-top sm:flex-row flex-col children:mb-2">
           <div className="i-carbon:4k text-4 mr-3 mt-0.5" />

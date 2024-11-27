@@ -34,7 +34,7 @@ const data = [
     outlink: "https://fnos.charlzyx.xyz/",
   },
   {
-    label: "safeline",
+    label: "Safeline",
     link: "https://10.5.6.7:9443",
     outlink: "https://safeline.charlzyx.xyz/",
   },
